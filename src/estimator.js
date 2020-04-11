@@ -18,7 +18,7 @@ const covid19ImpactEstimator = (data) => {
   const spreadRates = (obj) => {
     let result = 0;
     result = convertDays(obj) / 3;
-    return result;
+    return Math.trunc(result);
   };
   const infectedwithTime = (cases, dat) => {
     let result = 0;
