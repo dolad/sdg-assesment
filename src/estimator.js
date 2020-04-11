@@ -1,17 +1,17 @@
 
-let data = {
-    region:{
-        name:"Africa",
-        aveAge:19.7,
-        avgDailyIncomeInUSD:5,
-        avgDailyIncomePopulation:0.71,
-    },
-    periodType:"days",
-    timeToElapse:58,
-    reportedCases:674,
-    population:66622705,
-    totalHospitalBeds:1380614
-}
+// let data = {
+//     region:{
+//         name:"Africa",
+//         aveAge:19.7,
+//         avgDailyIncomeInUSD:5,
+//         avgDailyIncomePopulation:0.71,
+//     },
+//     periodType:"days",
+//     timeToElapse:58,
+//     reportedCases:674,
+//     population:66622705,
+//     totalHospitalBeds:1380614
+// }
 
 //  const data={};
 //  const impact={};
@@ -26,16 +26,16 @@ const covid19ImpactEstimator = (data) => {
             return data.reportedCases*10
         },
         infectionsByRequestedTime:(currentlyInfected,data)=>{
-            if(data.periodType=="days")
+            if(data.periodType == "days")
             {
                 time=data.timeToElapse / 3;
                 return currentlyInfected * Math.pow(2,time)
-            }else if(data.periodType=="week")
+            }else if(data.periodType == "week")
             {
                 time= parseInt((data.timeToElapse * 7) / 3)
                 return currentlyInfected * Math.pow(2,time)
             }
-            else if(data.periodType=="month"){
+            else if(data.periodType == "month"){
                 time=parseInt((data.timeToElapse * 30)/ 3)
                 return currentlyInfected * Math.pow(2,time)
             }
@@ -47,16 +47,16 @@ const covid19ImpactEstimator = (data) => {
             return data.reportedCases*50
         },
         infectionsByRequestedTime:(currentlyInfected,data)=>{
-            if(data.periodType=="days")
+            if(data.periodType == "days")
             {
                 time=data.timeToElapse / 3;
                 return currentlyInfected * Math.pow(2,time)
-            }else if(data.periodType=="week")
+            }else if(data.periodType == "week")
             {
                 time= parseInt((data.timeToElapse * 7) / 3)
                 return currentlyInfected * Math.pow(2,time)
             }
-            else if(data.periodType=="month"){
+            else if(data.periodType == "month"){
                 time=parseInt((data.timeToElapse * 30)/ 3)
                 return currentlyInfected * Math.pow(2,time)
             }
