@@ -16,19 +16,34 @@ const covid19ImpactEstimator = (data) => {
     }
     return date;
   };
-  impact.infectionsByRequestedTime = impact.currentlyInfected * 2 ** days(data);
-  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * 2 ** days(data);
-  severeImpact.severeCasesByRequestedTime = severeImpact.infectionsByRequestedTime * 0.15;
-  impact.severeCasesByRequestedTime = impact.infectionsByRequestedTime * 0.15;
+  const infectedwithTime = (cases, dat) => {
+    let result = 0;
+    result = cases.currentlyInfected * 2 ** days(dat);
+    return Math.trunc(result);
+  };
+  const severeByRequestedTime = (cases) => {
+    let result = 0;
+    result = cases.infectionsByRequestedTime * 0.15;
+    return Math.trunc(result);
+  };
   const bed = (dat, cases) => {
     let result = 0;
     result = (dat.totalHospitalBeds * 0.35) - cases.severeCasesByRequestedTime;
     return result;
   };
+  const icu = (cases) => {
+    let result = 0;
+    result = cases.infectionsByRequestedTime * 0.05;
+    return Math.trunc(result);
+  };
+  impact.infectionsByRequestedTime = infectedwithTime(impact, data);
+  severeImpact.infectionsByRequestedTime = infectedwithTime(severeImpact, data);
+  severeImpact.severeCasesByRequestedTime = severeByRequestedTime(severeImpact);
+  impact.severeCasesByRequestedTime = severeByRequestedTime(impact);
   impact.hospitalBedsByRequestedTime = bed(data, impact);
   severeImpact.hospitalBedsByRequestedTime = bed(data, impact);
-  impact.casesForICUByRequestedTime = impact.infectionsByRequestedTime * 0.05;
-  severeImpact.casesForICUByRequestedTime = severeImpact.infectionsByRequestedTime * 0.05;
+  impact.casesForICUByRequestedTime = icu(impact);
+  severeImpact.casesForICUByRequestedTime = icu(severeImpact);
   //   impact.infectionsByRequestedTime = impact.infectionsByRequestedTime * 0.2;
   //   severeImpact.infectionsByRequestedTime = severeImpact.infectionsByRequestedTime * 0.2;
   return {
