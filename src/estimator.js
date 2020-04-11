@@ -1,5 +1,3 @@
-/*eslint disable*/ 
-
 const covid19ImpactEstimator = (data) => {
   const impact = {};
   const severeImpact = {};
@@ -9,9 +7,11 @@ const covid19ImpactEstimator = (data) => {
 
   const converttodays = (obj) => {
     let date = 0;
-    if (obj.periodType === 'days') { date = Math.trunc(obj.timeToElapse / 3);}
+    if (obj.periodType === 'days') { date = Math.trunc(obj.timeToElapse / 3);
+    }
     else if (obj.periodType === 'week') { date = Math.trunc((obj.timeToElapse * 7) / 3);
-    } else if (obj.periodType === 'month') { date = Math.trunc((obj.timeToElapse * 30) / 3);}
+    } else if (obj.periodType === 'month') { date = Math.trunc((obj.timeToElapse * 30) / 3);
+    }
     return date
 };
   impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** converttodays(data));
