@@ -1,18 +1,4 @@
 
-const data = {
-    region:{
-        name:"Africa",
-        aveAge:19.7,
-        avgDailyIncomeInUSD:5,
-        avgDailyIncomePopulation:0.71,
-    },
-    periodType:"days",
-    timeToElapse:58,
-    reportedCases:674,
-    population:66622705,
-    totalHospitalBeds:1380614
-}
-
 const covid19ImpactEstimator = (data) =>{
     let impact={}
     let severeImpact={}
@@ -21,14 +7,14 @@ const covid19ImpactEstimator = (data) =>{
     severeImpact.currentlyInfected=data.reportedCases*50;
 
     converttodays=(data)=>{
-            if (data.periodType === "days")
+            if (data.periodType === 'days')
                     {
                      return parseInt(data.timeToElapse / 3);
-                    }else if (data.periodType === "week")
+                    }else if (data.periodType === 'week')
                     {
                       return  parseInt((data.timeToElapse * 7) / 3)
                     }
-                    else if (data.periodType === "month"){
+                    else if (data.periodType === 'month'){
                        return parseInt((data.timeToElapse * 30) / 3)
                     }
         }
