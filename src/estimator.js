@@ -12,7 +12,7 @@ const covid19ImpactEstimator = (data) => {
     } else if (obj.periodType === 'month') { date = parseInt((obj.timeToElapse * 30) / 3);
     }
     return date
-  };
+};
   impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** converttodays(data));
   severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** converttodays(data));
   severeImpact.severeCasesByRequestedTime = severeImpact.infectionsByRequestedTime * 0.15;
@@ -30,5 +30,5 @@ const covid19ImpactEstimator = (data) => {
     data
   };
 };
-// covid19ImpactEstimator(data)
+
 export default covid19ImpactEstimator;
