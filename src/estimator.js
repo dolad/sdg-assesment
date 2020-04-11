@@ -1,21 +1,21 @@
 const covid19ImpactEstimator = (data) => {
-  let impact = {};
-  let severeImpact = {};
+  const impact = {};
+  const severeImpact = {};
 
   impact.currentlyInfected = data.reportedCases * 10;
   severeImpact.currentlyInfected = data.reportedCases * 50;
 
-  let converttodays = (data) => {
-      let date= null
-    if (data.periodType === 'days') { 
-      date= parseInt(data.timeToElapse / 3);
-      return date
-    } else if (data.periodType === 'week') {
-      date= parseInt((data.timeToElapse * 7) / 3);
-      return date
-    } else if (data.periodType === 'month') {
-      date= parseInt((data.timeToElapse * 30) / 3);
-      return date
+  const converttodays = (datas) => {
+    let date = 0;
+    if (datas.periodType === 'days') { 
+      date= parseInt(datas.timeToElapse / 3);
+      return date;
+    } else if (datas.periodType === 'week') {
+      date = parseInt((datas.timeToElapse * 7) / 3);
+      return date;
+    } else if (datas.periodType === 'month') {
+      date = parseInt((datas.timeToElapse * 30) / 3);
+      return date;
     }
     return date
   };
@@ -31,8 +31,8 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForICUByRequestedTime = impact.infectionsByRequestedTime * 0.05;
   severeImpact.casesForICUByRequestedTime = severeImpact.infectionsByRequestedTime * 0.05;
 
-  impact.infectionsByRequestedTime = impact.infectionsByRequestedTime * 0.2;
-  severeImpact.infectionsByRequestedTime = severeImpact.infectionsByRequestedTime * 0.2;
+//   impact.infectionsByRequestedTime = impact.infectionsByRequestedTime * 0.2;
+//   severeImpact.infectionsByRequestedTime = severeImpact.infectionsByRequestedTime * 0.2;
 
   return {
     impact,
