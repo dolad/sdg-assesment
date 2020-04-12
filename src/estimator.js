@@ -49,8 +49,8 @@ const covid19ImpactEstimator = (data) => {
     let result = 0;
     const cased = cases.infectionsByRequestedTime;
     const incomeInUSD = dat.region.avgDailyIncomeInUSD;
-    const incomePopulation = data.region.avgDailyIncomeInUSD;
-    result = Math.trunc((cased * incomeInUSD * incomePopulation) / spreadRates(dat));
+    const incomePopulation = data.region.avgDailyIncomePopulation;
+    result = Math.trunc((cased * incomeInUSD * incomePopulation) / convertDays(dat));
     return result;
   };
   impact.infectionsByRequestedTime = infectedwithTime(impact, data);
