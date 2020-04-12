@@ -50,7 +50,7 @@ const covid19ImpactEstimator = (data) => {
     const cased = cases.infectionsByRequestedTime;
     const incomeInUSD = dat.region.avgDailyIncomeInUSD;
     const incomePopulation = data.region.avgDailyIncomeInUSD;
-    result = Math.trunc((cased * incomeInUSD * incomePopulation) / convertDays(dat));
+    result = Math.trunc((cased * incomeInUSD * incomePopulation) / spreadRates(dat));
     return result;
   };
   impact.infectionsByRequestedTime = infectedwithTime(impact, data);
