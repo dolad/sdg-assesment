@@ -2,8 +2,6 @@ const covid19ImpactEstimator = (data) => {
   const impact = {};
   const severeImpact = {};
 
-  impact.currentlyInfected = data.reportedCases * 10;
-  severeImpact.currentlyInfected = data.reportedCases * 50;
   const convertDays = (dat) => {
     let days = 0;
     if (dat.periodType === 'days') {
@@ -49,21 +47,24 @@ const covid19ImpactEstimator = (data) => {
     let result = 0;
     const cased = cases.infectionsByRequestedTime;
     const incomeInUSD = dat.region.avgDailyIncomeInUSD;
-    const incomePopulation = data.region.avgDailyIncomePopulation;
+    const incomePopulation = dat.region.avgDailyIncomePopulation;
     result = Math.trunc((cased * incomeInUSD * incomePopulation) / convertDays(dat));
     return result;
   };
+  impact.currentlyInfected = data.reportedCases * 10;
   impact.infectionsByRequestedTime = infectedwithTime(impact, data);
-  severeImpact.infectionsByRequestedTime = infectedwithTime(severeImpact, data);
-  severeImpact.severeCasesByRequestedTime = severeByRequestedTime(severeImpact);
   impact.severeCasesByRequestedTime = severeByRequestedTime(impact);
   impact.hospitalBedsByRequestedTime = bed(data, impact);
-  severeImpact.hospitalBedsByRequestedTime = bed(data, severeImpact);
   impact.casesForICUByRequestedTime = icu(impact);
-  severeImpact.casesForICUByRequestedTime = icu(severeImpact);
   impact.casesForVentilatorsByRequestedTime = vent(impact);
-  severeImpact.casesForVentilatorsByRequestedTime = vent(severeImpact);
   impact.dollarsInFlight = dollarsInFlight(data, impact);
+
+  severeImpact.currentlyInfected = data.reportedCases * 50;
+  severeImpact.infectionsByRequestedTime = infectedwithTime(severeImpact, data);
+  severeImpact.severeCasesByRequestedTime = severeByRequestedTime(severeImpact);
+  severeImpact.hospitalBedsByRequestedTime = bed(data, severeImpact);
+  severeImpact.casesForICUByRequestedTime = icu(severeImpact);
+  severeImpact.casesForVentilatorsByRequestedTime = vent(severeImpact);
   severeImpact.dollarsInFlight = dollarsInFlight(data, severeImpact);
   //   severeImpact.infectionsByRequestedTime = severeImpact.infectionsByRequestedTime * 0.2;
   return {
