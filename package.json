@@ -6,7 +6,9 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "start": "node ./src/app.js"
+    "serve": "node ./src/app.js",
+    "start":"npm run prod",
+    "prod": "NODE_ENV=production npm-run-all build server"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
